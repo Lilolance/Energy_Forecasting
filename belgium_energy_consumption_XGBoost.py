@@ -5,8 +5,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Load CSV
-df = pd.read_csv("data/belgium_energyconsumption_01012025_01012026.csv", header=0, names=['interval', 'forecast', 'actual'], na_values='-')
+df = pd.read_csv("entsoe_10_years_combined.csv", header=0, names=['interval', 'forecast', 'actual'], na_values='-')
 
+print(df.head())
 # Convert the start time to datetime
 df['start_time'] = pd.to_datetime(df['interval'].str.split(' - ').str[0], format="%d.%m.%Y %H:%M")
 df['end_time'] = pd.to_datetime(df['interval'].str.split(' - ').str[1], format="%d.%m.%Y %H:%M")
@@ -20,14 +21,6 @@ plt.ylabel('Energy Consumption')
 plt.title('Energy Consumption Actual vs Forecast')
 plt.legend()
 plt.show()
-
-# custom MAPE function
-def mape(y_true, y_pred):
-    return np.mean(np.abs((y_true - y_pred) / y_true)) * 100
-
-# compute MAPE on train set between actual and predicted by ENSOE-E
-mape_ensoe = mape(df['actual'].values, df['forecast'].values)
-print("MAPE by ENSOE-E:", mape_ensoe)
 
 # engineer features: date, time index, weekday x hour, remove NA
 # Remove rows where either forecast or actual is NaN
@@ -47,6 +40,14 @@ df['time_index'] = np.arange(len(df))
 
 # add combine features: weekday and hour
 df['weekday_hour'] = df['dayofweek'] * 24 + df['hour']
+
+# custom MAPE function
+def mape(y_true, y_pred):
+    return np.mean(np.abs((y_true - y_pred) / y_true)) * 100
+
+# compute MAPE on train set between actual and predicted by ENSOE-E
+mape_ensoe = mape(df['actual'].values, df['forecast'].values)
+print("MAPE by ENSOE-E:", mape_ensoe)
 
 # initialize input and output
 X = df[['day', 'dayofweek', 'month', 'year', 'hour', 'quarter', 'time_index', 'dayofweek']].values
@@ -89,9 +90,9 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import TimeSeriesSplit
 
 param_grid = {
-    'max_depth': [3, 5, 7, 9],
-    'n_estimators': [50, 100, 150, 200],
-    'learning_rate': [0.01, 0.05, 0.1, 0.2]
+    'max_depth': [3, 5, 7],
+    'n_estimators': [100, 150, 200],
+    'learning_rate': [0.01, 0.05, 0.1]
 }
 
 grid_search = GridSearchCV(estimator=xgb_model, param_grid=param_grid, scoring='neg_mean_absolute_error', cv=TimeSeriesSplit(n_splits=3), verbose=1)
