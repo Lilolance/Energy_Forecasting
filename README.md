@@ -73,3 +73,8 @@ Explored random forest and XGBoost (with hyperparamater optimalization) for a la
 🚀 Next Steps
 Incorporate external features (e.g., weather, holidays)
 Explore LSTM or Transformer-based models for sequential dependencies
+
+## Files
+- `belgium_energy_consumption.ipynb`: Main exploration notebook
+- `belgium_energy_consumption_XGBoost.py`: Extended XGBoost implementation
+- `merge_data.py`: Data preprocessing utilities
