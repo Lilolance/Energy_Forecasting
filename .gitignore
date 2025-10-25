@@ -1,18 +1,51 @@
+# Python artifacts
 __pycache__/
 *.py[cod]
-*.log
-*.tmp
+*.so
+*.egg
+*.egg-info/
+*.pyd
+
+# Jupyter notebooks
+# .ipynb_checkpoints/
+
+# Virtual environments
 .env/
 .venv/
 venv/
 env/
-.ipynb_checkpoints/
+
+# IDE/editor settings
 .vscode/
+.idea/
+
+# Streamlit cache and logs
+.streamlit/
+*.log
+*.tmp
+
+# Data files
 *.csv
+*.tsv
 *.xlsx
+*.xls
 *.npy
 *.npz
 *.pkl
 *.h5
+*.json
+*.xml
+
+# Model files
+*.joblib
+*.sav
+
+# OS-specific files
 .DS_Store
 Thumbs.db
+
+# Project-specific folders (optional)
+# Uncomment if you have folders like 'outputs', 'models', or 'data' you don't want tracked
+# outputs/
+# models/
+# data/

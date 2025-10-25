@@ -6,7 +6,7 @@ folder = "data"  # Change this to your actual folder name
 all_data = []
 
 # Loop through each year
-for year in range(2015, 2025):
+for year in range(2015, 2026):
     filename = f"Total Load - Day Ahead _ Actual_{year}01010000-{year+1}01010000.csv"
     filepath = os.path.join(folder, filename)
     

@@ -41,9 +41,9 @@ df['time_index'] = np.arange(len(df))
 # add combine features: weekday and hour
 df['weekday_hour'] = df['dayofweek'] * 24 + df['hour']
 
-# custom MAPE function
-def mape(y_true, y_pred):
-    return np.mean(np.abs((y_true - y_pred) / y_true)) * 100
+def mape(actual, predicted):
+    # Calculate Mean Absolute Percentage Error (MAPE)
+    return np.mean(np.abs((actual - predicted) / actual)) * 100
 
 # compute MAPE on train set between actual and predicted by ENSOE-E
 mape_ensoe = mape(df['actual'].values, df['forecast'].values)
