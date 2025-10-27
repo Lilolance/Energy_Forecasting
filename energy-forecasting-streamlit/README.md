@@ -1,7 +1,7 @@
 
 
 
-# Belgium Energy Consumption Forecasting
+# 📊 Quarter-Hourly Energy Consumption Forecasting Belgium
 
 ## 🎯 Project Overview
 This project focuses on forecasting quarter-hourly energy consumption in Belgium using machine learning techniques. The goal is to provide accurate predictions and it is motivated by the need for energy management and policy planning, particularly in the context of increasing reliance on renewable energy sources.
