@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 from src.data.loader import load_data, prepare_data_for_model, extract_features
 from src.utils import get_train_val_test_split, mape
-from src.models.xgboost_model import train_xgboost_model, optimize_hyperparameters
+from src.xgboost_model import train_xgboost_model, optimize_hyperparameters
 from src.visualization import plot_results
 from datetime import date
 
@@ -82,7 +82,8 @@ if "start_date" in st.session_state:
 
             # Train
             model = get_trained_model(train_features, train_target) # n_est=100, max_depth=6, learning rate=0.1
-            st.success("Model trained successfully!")
+            st.success("Model trained successfully!"
+                       " The data is split (chronologically) between 70% training data, 15% crossvalidation data and 15% test data.")
 
             # Optimize
             model = get_optimized_model(model, train_features, train_target, val_features, val_target)
