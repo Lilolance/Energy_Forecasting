@@ -1,17 +1,22 @@
-# Use official Python image
-FROM python:3.10-slim   
+# Build stage
+FROM python:3.9-slim AS builder
 
-# Set working directory
 WORKDIR /app
+COPY requirements.txt .
 
-# Copy files
-COPY . /app
+RUN python -m venv /opt/venv && \
+    . /opt/venv/bin/activate && \
+    pip install --no-cache-dir -r requirements.txt
 
-# Install dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Final stage
+FROM python:3.9-slim
 
-# Expose Streamlit port
+WORKDIR /app
+COPY --from=builder /opt/venv /opt/venv
+COPY ./src ./src
+
+ENV PATH="/opt/venv/bin/:$PATH"
+
 EXPOSE 8501
 
-# Run Streamlit
-CMD ["streamlit", "run", "streamlit_app.py", "--server.port=8501", "--server.address=0.0.0.0"]
+CMD ["streamlit", "run", "streamlit_app.py"]

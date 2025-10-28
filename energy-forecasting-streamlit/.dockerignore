@@ -1,12 +1,49 @@
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+*.so
+.Python
+.pytest_cache/
+.coverage
+
+# Virtual Environment
+.env
+.venv/
+env/
+venv/
+ENV/
+
+# Version Control
+.git/
+.gitignore
+
+# Data and Models
+data/
+models/
 *.pkl
 *.csv
 *.xlsx
-*.log
+*.parquet
+*.h5
+
+# IDE
+.vscode/
+.idea/
+*.swp
 .DS_Store
-.env
-.venv/
-.git/
-data/
-Models/
+
+# Logs and temp files
+*.log
+logs/
+tmp/
+temp/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+notebooks/
+
+# Documentation
+docs/
+*.md
+LICENSE

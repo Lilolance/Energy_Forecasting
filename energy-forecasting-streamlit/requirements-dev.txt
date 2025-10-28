@@ -1,0 +1,4 @@
+-r requirements.txt
+pytest==7.4.0
+pytest-mock==3.11.1
+matplotlib==3.8.0
